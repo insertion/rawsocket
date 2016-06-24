@@ -18,7 +18,7 @@ int main()
     char buff[MAXSIZE];
     char message[]="请输入密码：";
     char text[]="you have a root shell here\n";
-    char err[]="passwd is wrong ";
+    char err[]="passwd is wrong\n";
     int listenfd,connfd,n;
     //创建监听fd和连接fd
     struct sockaddr_in target;
