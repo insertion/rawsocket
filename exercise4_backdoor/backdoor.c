@@ -58,7 +58,7 @@ int main()
         //而exec直接用目标程序替换掉本进程,所以用system while循环有效，而用exec，在shell退出时，程序直接关闭
         //--wrong,"sudo -s"--:system("bin/bash -s")//这条命令不需要setuid(0)，因为父进程的suid为0，拥有最高权限
         //bash需要uid为0才能获取root权限，而sh不需要
-        //fork(exec)得到的子进程的所有uid只继承父进程的ruid APUE-p256
+        // APUE-p256
         //execlp("/bin/bash","/bin/bash",NULL);
         close(connfd);
     }
