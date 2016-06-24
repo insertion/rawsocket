@@ -3,10 +3,8 @@
 	> Author: wanglei
 	> Mail: 
 	> Created Time: 2016年06月22日 星期三 16时05分34秒
-    > Decription  :标准输入输出重定向
+    > Decription  :使标准输入输出不在打印到屏幕
  ************************************************************************/
-
-#include<stdio.h>
 static int os_daemon(int nochdir, int noclose)
 {
 	int devnull;
